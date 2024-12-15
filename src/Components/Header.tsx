@@ -1,14 +1,16 @@
 import React from "react";
 import pollyglot from "/assets/parrot.png";
-
+import "/src/css/styles.css";
 export default function Header() {
-  return (
-    <header className="header">
-      <img src="{pollyglot}" className="header--image" alt="troll face" />
-      <div>
-        <h2 className="header--title">pollyglot</h2>
-        <h4 className="header--project">React Course - Project 3</h4>
-      </div>
-    </header>
-  );
+	return (
+		<header className="header header-background mb-3">
+			<img src={pollyglot} className="header--image" alt="PollyGlot logo" />
+			<div>
+				<h1 className="header--title text-capitalize">
+					polly
+					<span className="text-uppercase">g</span>lot
+				</h1>
+			</div>
+		</header>
+	);
 }
