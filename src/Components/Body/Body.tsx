@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 import RightArrow from "/assets/chevron-right.svg";
-import { OPENAI_API_KEY } from "/src/env.tsx";
+import OpenAI from "openai";
+import { OPENAI_API_KEY } from "../../env.tsx";
+import { configDotenv } from "dotenv";
 
 /* import { arrow } from "@popperjs/core"; */
 
 export default function Body() {
 	const [conversation, setConversation] = useState([]);
 	const [language, setLanguage] = useState("portuguese");
+
 	const apiKey = OPENAI_API_KEY;
 	/* console.log(apiKey); */
+	const openai = new OpenAI({ apiKey: apiKey, dangerouslyAllowBrowser: true });
+
+	console.log(conversation);
 
 	const convo = conversation.map((conv) => conv.language);
 	const systemMessage =
@@ -16,11 +22,21 @@ export default function Body() {
 		language +
 		". You will only respond with the translation and nothing else.";
 
+	const openaiMessage = [{ role: "system", content: systemMessage }, ...convo];
+
+	function handleSubmit(e) {
+		e.preventDefault();
+		const userMessage = e.target.elements[0].value;
+
+		setConversation([...conversation, { role: "user", content: userMessage }]);
+		e.target.elements[0].value = "";
+	}
+
 	return (
 		<main>
 			<div className="chat-box">
 				<div className="conversation-box"></div>
-				<form className="input-box">
+				<form className="input-box" onSubmit={handleSubmit}>
 					<input type="text" placeholder="What do you need translated?" />
 					<button>
 						<img src={RightArrow} alt="right-arrow" />
