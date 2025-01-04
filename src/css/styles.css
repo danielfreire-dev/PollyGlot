@@ -1,16 +1,19 @@
 /* Global styles */
-html {
-	overflow-y: scroll;
+html,
+body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	overflow-y: auto;
 }
 
-body {
-	max-height: 100vh;
-}
 :root {
 	--primary-color: #007bff;
 	--secondary-color: #ccc;
 	--border-radius: 0.5rem;
 	--padding: 20px;
+	font-size: 1em;
 }
 
 /* Layout styles */
@@ -25,6 +28,12 @@ header {
 }
 main {
 	flex: 1;
+	width: 90vw;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: var(--padding);
+	padding: var(--padding);
 }
 
 .chat-box {
@@ -124,7 +133,6 @@ main {
 	padding: 0.5rem;
 	border-radius: 3%;
 	margin: 0.5rem;
-	/* max-width: 75%; */
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 }
@@ -138,6 +146,7 @@ main {
 
 .user {
 	background-color: rgb(113, 245, 113);
+	align-self: self-end;
 	padding: 5px 10px;
 	align-items: end;
 	text-align: end;
@@ -150,6 +159,7 @@ main {
 
 .system {
 	background-color: rgb(154, 154, 247);
+	align-self: self-start;
 	padding: 5px 10px;
 	text-align: start;
 	border-radius: 0% 5px 5px 5px / 0% 5px 5px 5px;

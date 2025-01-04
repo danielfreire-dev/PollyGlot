@@ -22,9 +22,6 @@ export default function Body() {
 
 	const apiKey = OPENAI_API_KEY;
 
-	console.log(conversation);
-	console.log(language);
-
 	function MapConversation() {
 		const convo = conversation.map((conv) => {
 			return (
@@ -56,8 +53,6 @@ export default function Body() {
 					},
 				],
 			});
-
-			console.log(response.choices[0].message.content);
 
 			setConversation((prevConvo): Message[] => [
 				...prevConvo,
@@ -96,7 +91,6 @@ export default function Body() {
 			block: "end",
 			inline: "center",
 		});
-		console.log("scrolled to bottom");
 	}
 
 	return (
