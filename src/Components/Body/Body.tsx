@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import RightArrow from "/assets/chevron-right.svg";
 import MessageBubble from "../MessageBubble.tsx";
 import OpenAI from "openai";
@@ -14,136 +14,10 @@ export default function Body() {
 	const [error, setError] = useState<string>("");
 	const messagesEndRef = useRef();
 
-	let convoJson: Message[] = [
-		{
-			role: "user",
-			content: "hey",
-		},
-		{
-			role: "system",
-			content: "oi",
-		},
-		{
-			role: "user",
-			content: "hi",
-		},
-		{
-			role: "system",
-			content: "oi",
-		},
-		{
-			role: "user",
-			content: "boas",
-		},
-		{
-			role: "system",
-			content: "Olá!",
-		},
-		{
-			role: "user",
-			content: "hey there",
-		},
-		{
-			role: "system",
-			content: "olá",
-		},
-		{
-			role: "user",
-			content: "yes",
-		},
-		{
-			role: "system",
-			content: "Sim",
-		},
-		{
-			role: "user",
-			content: "no",
-		},
-		{
-			role: "system",
-			content: "Não",
-		},
-		{
-			role: "user",
-			content: "maybe",
-		},
-		{
-			role: "system",
-			content: "talvez",
-		},
-		{
-			role: "user",
-			content: "may",
-		},
-		{
-			role: "system",
-			content: "pode",
-		},
-		{
-			role: "user",
-			content: "hey",
-		},
-		{
-			role: "system",
-			content: "oi",
-		},
-		{
-			role: "user",
-			content: "hi",
-		},
-		{
-			role: "system",
-			content: "oi",
-		},
-		{
-			role: "user",
-			content: "boas",
-		},
-		{
-			role: "system",
-			content: "Olá!",
-		},
-		{
-			role: "user",
-			content: "hey there",
-		},
-		{
-			role: "system",
-			content: "olá",
-		},
-		{
-			role: "user",
-			content: "yes",
-		},
-		{
-			role: "system",
-			content: "Sim",
-		},
-		{
-			role: "user",
-			content: "no",
-		},
-		{
-			role: "system",
-			content: "Não",
-		},
-		{
-			role: "user",
-			content: "maybe",
-		},
-		{
-			role: "system",
-			content: "talvez",
-		},
-		{
-			role: "user",
-			content: "may",
-		},
-		{
-			role: "system",
-			content: "pode",
-		},
-	];
+	useEffect(() => {
+		scrollToBottom();
+	}, [conversation]);
+
 	type Message = { role: "user" | "system"; content: string | null };
 
 	const apiKey = OPENAI_API_KEY;
@@ -212,7 +86,7 @@ export default function Body() {
 
 		fetchReport({ role: "user", content: userMessage });
 		setLoading((prev) => !prev);
-		scrollToBottom();
+		/* scrollToBottom(); */
 	}
 
 	function scrollToBottom() {
@@ -229,10 +103,9 @@ export default function Body() {
 		<main className="flex-1">
 			<div className="chat-box">
 				<div className="conversation-box">
-					<div>
-						{convoJson.length > 0 && <MapConversation />}
-						{error && <div className="error">{error}</div>}
-					</div>
+					{conversation.length > 0 && <MapConversation />}
+					{error && <div className="error">{error}</div>}
+
 					<div className="ref" ref={messagesEndRef}></div>
 				</div>
 
