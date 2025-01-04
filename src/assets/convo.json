@@ -1,0 +1,142 @@
+[
+	{
+		"role": "user",
+		"content": "hey"
+	},
+	{
+		"role": "system",
+		"content": "oi"
+	},
+	{
+		"role": "user",
+		"content": "hi"
+	},
+	{
+		"role": "system",
+		"content": "oi"
+	},
+	{
+		"role": "user",
+		"content": "boas"
+	},
+	{
+		"role": "system",
+		"content": "Olá!"
+	},
+	{
+		"role": "user",
+		"content": "hey there"
+	},
+	{
+		"role": "system",
+		"content": "olá"
+	},
+	{
+		"role": "user",
+		"content": "yes"
+	},
+	{
+		"role": "system",
+		"content": "Sim"
+	},
+	{
+		"role": "user",
+		"content": "no"
+	},
+	{
+		"role": "system",
+		"content": "Não"
+	},
+	{
+		"role": "user",
+		"content": "maybe"
+	},
+	{
+		"role": "system",
+		"content": "talvez"
+	},
+	{
+		"role": "user",
+		"content": "may"
+	},
+	{
+		"role": "system",
+		"content": "pode"
+	},
+	{
+		"role": "user",
+		"content": "hey"
+	},
+	{
+		"role": "system",
+		"content": "oi"
+	},
+	{
+		"role": "user",
+		"content": "hi"
+	},
+	{
+		"role": "system",
+		"content": "oi"
+	},
+	{
+		"role": "user",
+		"content": "boas"
+	},
+	{
+		"role": "system",
+		"content": "Olá!"
+	},
+	{
+		"role": "user",
+		"content": "hey there"
+	},
+	{
+		"role": "system",
+		"content": "olá"
+	},
+	{
+		"role": "user",
+		"content": "yes"
+	},
+	{
+		"role": "system",
+		"content": "Sim"
+	},
+	{
+		"role": "user",
+		"content": "no"
+	},
+	{
+		"role": "system",
+		"content": "Não"
+	},
+	{
+		"role": "user",
+		"content": "maybe"
+	},
+	{
+		"role": "system",
+		"content": "talvez"
+	},
+	{
+		"role": "user",
+		"content": "may"
+	},
+	{
+		"role": "system",
+		"content": "pode"
+	},
+	{
+		"role": "user",
+		"content": "maybe"
+	},
+	{
+		"role": "system",
+		"content": "talvez"
+	},
+	{
+		"role": "system",
+		"content": "Não"
+	}
+]

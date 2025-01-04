@@ -12,7 +12,6 @@ export default function Body() {
 	const [language, setLanguage] = useState<string>("portuguese");
 	const [loading, setLoading] = useState<boolean>(false);
 	const [error, setError] = useState<string>("");
-	const messagesEndRef = useRef();
 
 	let convoJson: Message[] = [
 		{
@@ -148,17 +147,34 @@ export default function Body() {
 
 	const apiKey = OPENAI_API_KEY;
 
+	const ScrollIntoViewBox = () => {
+		const targetElementRef = useRef(null);
+
+		const handleChange = (event) => {
+			// Scroll the target element into view when the change event occurs
+			if (targetElementRef.current) {
+				targetElementRef.current.scrollIntoView({
+					behavior: "smooth",
+					block: "end",
+				});
+			}
+		};
+		const convo = convoJson.map((conv) => {
+			return (
+				<MessageBubble
+					key={nanoid()}
+					message={conv.content}
+					role={conv.role}
+					ref={targetElementRef}
+				/>
+			);
+		});
+		return convo;
+	};
 	console.log(conversation);
 	console.log(language);
 
-	function MapConversation() {
-		const convo = conversation.map((conv) => {
-			return (
-				<MessageBubble key={nanoid()} message={conv.content} role={conv.role} />
-			);
-		});
-		return <>{convo}</>;
-	}
+	function MapConversation() {}
 
 	const systemMessage =
 		"You are a helpful polyglot who will translate the user's message to " +
@@ -171,7 +187,6 @@ export default function Body() {
 				apiKey: apiKey,
 				dangerouslyAllowBrowser: true,
 			});
-
 			const response = await openai.chat.completions.create({
 				model: "gpt-3.5-turbo",
 				messages: [
@@ -182,9 +197,7 @@ export default function Body() {
 					},
 				],
 			});
-
 			console.log(response.choices[0].message.content);
-
 			setConversation((prevConvo): Message[] => [
 				...prevConvo,
 				{
@@ -192,9 +205,6 @@ export default function Body() {
 					content: response.choices[0].message.content,
 				},
 			]);
-
-			setLoading((prev) => !prev);
-			setError(""); // Reset the error state
 		} catch (err) {
 			console.log("Error:", err);
 			setError("Unable to access AI. Please refresh and try again");
@@ -209,33 +219,26 @@ export default function Body() {
 			{ role: "user", content: userMessage },
 		]);
 		e.target.elements[0].value = "";
-
 		fetchReport({ role: "user", content: userMessage });
-		setLoading((prev) => !prev);
-		scrollToBottom();
 	}
 
 	function scrollToBottom() {
-		messagesEndRef.current?.scrollIntoView({
-			behavior: "smooth",
-			block: "end",
-			inline: "center",
-			alignToTop: false,
-		});
-		console.log("scrolled to bottom");
+		// Scroll the target element into view when the change event occurs
+		if (targetElementRef.current) {
+			targetElementRef.current.scrollIntoView({
+				behavior: "smooth",
+				block: "start",
+			});
+		}
 	}
 
 	return (
 		<main className="flex-1">
 			<div className="chat-box">
-				<div className="conversation-box">
-					<div>
-						{convoJson.length > 0 && <MapConversation />}
-						{error && <div className="error">{error}</div>}
-					</div>
-					<div className="ref" ref={messagesEndRef}></div>
+				<div className="conversation-box" onChange={scrollToBottom}>
+					{convoJson.length > 0 && <ScrollIntoViewBox />}
 				</div>
-
+				{error && <div>{error}</div>}
 				<form className="input-box" onSubmit={handleSubmit}>
 					<div>
 						<input type="text" placeholder="What do you need translated?" />

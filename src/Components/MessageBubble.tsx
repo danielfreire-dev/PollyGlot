@@ -5,11 +5,11 @@ export default function MessageBubble({
 	message,
 }: {
 	role: "user" | "system";
-	message: string;
+	message: string | null;
 }) {
 	return (
-		<div className={role}>
-			<div className={"messagetext"}>{message}</div>
-		</div>
+		<>
+			<p className={`${role} messagetext`}>{message}</p>
+		</>
 	);
 }
