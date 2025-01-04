@@ -12,7 +12,7 @@ export default function Body() {
 	const [language, setLanguage] = useState<string>("portuguese");
 	const [loading, setLoading] = useState<boolean>(false);
 	const [error, setError] = useState<string>("");
-	const messagesEndRef = useRef();
+	const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
 	useEffect(() => {
 		scrollToBottom();
@@ -52,7 +52,7 @@ export default function Body() {
 					{ role: "system", content: systemMessage },
 					{
 						role: "user",
-						content: userMess.content,
+						content: userMess.content || "",
 					},
 				],
 			});
@@ -75,18 +75,19 @@ export default function Body() {
 		}
 	}
 
-	function handleSubmit(e) {
+	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
-		const userMessage = e.target.elements[0].value;
+		const target = e.target as HTMLFormElement;
+		const inputElement = target.elements[0] as HTMLInputElement;
+		const userMessage = inputElement.value;
 		setConversation((prevConvo) => [
 			...prevConvo,
 			{ role: "user", content: userMessage },
 		]);
-		e.target.elements[0].value = "";
+		inputElement.value = "";
 
 		fetchReport({ role: "user", content: userMessage });
 		setLoading((prev) => !prev);
-		/* scrollToBottom(); */
 	}
 
 	function scrollToBottom() {
@@ -94,7 +95,6 @@ export default function Body() {
 			behavior: "smooth",
 			block: "end",
 			inline: "center",
-			alignToTop: false,
 		});
 		console.log("scrolled to bottom");
 	}
