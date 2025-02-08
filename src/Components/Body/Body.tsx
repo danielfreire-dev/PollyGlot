@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import RightArrow from "/assets/chevron-right.svg";
+import RightArrow from "/assets/send.svg";
 import MessageBubble from "../MessageBubble.tsx";
 import OpenAI from "openai";
 import { OPENAI_API_KEY } from "../../env.tsx";
@@ -18,7 +18,7 @@ export default function Body() {
 		scrollToBottom();
 	}, [conversation]);
 
-	type Message = { role: "user" | "system"; content: string | null };
+	type Message = { role: "user" | "system" | "error"; content: string | null };
 
 	const apiKey = OPENAI_API_KEY;
 
@@ -67,6 +67,13 @@ export default function Body() {
 		} catch (err) {
 			console.log("Error:", err);
 			setError("Unable to access AI. Please refresh and try again");
+			setConversation((prevConvo) => [
+				...prevConvo,
+				{
+					role: "error",
+					content: "Unable to access AI. Please refresh and try again",
+				},
+			]);
 		}
 	}
 
@@ -98,14 +105,16 @@ export default function Body() {
 			<div className="chat-box">
 				<div className="conversation-box">
 					{conversation.length > 0 && <MapConversation />}
-					{error && <div className="error">{error}</div>}
-
 					<div className="ref" ref={messagesEndRef}></div>
 				</div>
 
 				<form className="input-box" onSubmit={handleSubmit}>
-					<div>
-						<input type="text" placeholder="What do you need translated?" />
+					<div className="input-container">
+						<input
+							id="user-input"
+							type="text"
+							placeholder="What do you need translated?"
+						/>
 						<button>
 							<img src={RightArrow} alt="right-arrow" />
 						</button>
@@ -117,13 +126,11 @@ export default function Body() {
 						value={language}
 						onChange={(e) => setLanguage(e.target.value)}
 					>
-						<option value="portuguese">portuguese</option>
-						<option value="english">english</option>
-						<option value="french">french</option>
-						<option value="japanese">japanese</option>
-						<option value="italian">italian</option>
-						<option value="russian">russian</option>
-						<option value="polish">polish</option>
+						<option value="portuguese">🇵🇹 portuguese</option>
+						<option value="english">🇺🇸 english</option>
+						<option value="french">🇫🇷 french</option>
+						<option value="japanese">🇵🇱 polish</option>
+						<option value="italian">🇮🇹 italian</option>
 					</select>
 				</form>
 			</div>

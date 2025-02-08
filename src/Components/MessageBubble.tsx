@@ -4,7 +4,7 @@ export default function MessageBubble({
 	role,
 	message,
 }: {
-	role: "user" | "system";
+	role: "user" | "system" | "error";
 	message: string | null;
 }) {
 	return (

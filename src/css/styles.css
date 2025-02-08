@@ -1,11 +1,10 @@
 /* Global styles */
-html,
+
 body {
-	height: 100%;
+	height: 100vh;
 	width: 100%;
 	margin: 0;
 	padding: 0;
-	overflow-y: auto;
 }
 
 :root {
@@ -20,11 +19,16 @@ body {
 
 #root {
 	display: flex;
+	align-items: center;
+	justify-content: center;
 	flex-direction: column;
 }
 
 header {
-	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	gap: var(--padding);
+	padding: var(--padding);
 }
 main {
 	flex: 1;
@@ -33,24 +37,31 @@ main {
 	flex-direction: column;
 	justify-content: center;
 	gap: var(--padding);
-	padding: var(--padding);
+	margin: var(--padding);
+}
+
+.flex-1 {
+	display: flex;
 }
 
 .chat-box {
 	display: flex;
+	flex: 1 1;
 	flex-direction: column;
-	max-height: 75vh;
+	overflow-y: auto;
+	max-height: 70vh;
 }
 
 .conversation-box {
 	display: flex;
+	flex: 1;
 	flex-direction: column;
+	flex-wrap: nowrap;
 	gap: var(--padding);
-	padding: var(--padding);
+	/* padding: var(--padding); */
 	border: 1px solid var(--secondary-color);
 	border-radius: var(--border-radius);
 	margin-bottom: var(--padding);
-
 	overflow-y: auto;
 }
 
@@ -66,7 +77,7 @@ main {
 	display: flex;
 	align-items: center;
 	gap: var(--padding);
-	padding: var(--padding);
+	margin-top: var(--padding);
 }
 
 .header--image {
@@ -74,6 +85,60 @@ main {
 }
 
 /* Input styles */
+.input-container {
+	display: flex;
+	gap: var(--padding);
+	width: 100%;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+
+.input-container {
+	flex: 1;
+	padding: 0.5rem;
+	border: 1px solid var(--secondary-color);
+	border-radius: var(--border-radius);
+	transition: border-color 0.2s ease;
+	outline: none;
+	max-width: 100%;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	background-color: var(--secondary-color);
+	color: black;
+	-webkit-border-radius: var(--border-radius);
+	-moz-border-radius: var(--border-radius);
+	-ms-border-radius: var(--border-radius);
+	-o-border-radius: var(--border-radius);
+	-webkit-transition: border-color 0.2s ease;
+	-moz-transition: border-color 0.2s ease;
+	-ms-transition: border-color 0.2s ease;
+	-o-transition: border-color 0.2s ease;
+}
+
+#user-input {
+	flex: 1;
+	padding: 0.5rem;
+	border: 1px solid var(--secondary-color);
+	border-radius: var(--border-radius);
+	transition: border-color 0.2s ease;
+	outline: none;
+	max-width: 100%;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	background-color: var(--secondary-color);
+	color: black;
+	-webkit-border-radius: var(--border-radius);
+	-moz-border-radius: var(--border-radius);
+	-ms-border-radius: var(--border-radius);
+	-o-border-radius: var(--border-radius);
+	-webkit-transition: border-color 0.2s ease;
+	-moz-transition: border-color 0.2s ease;
+	-ms-transition: border-color 0.2s ease;
+	-o-transition: border-color 0.2s ease;
+}
 
 .conversation-box--input {
 	display: flex;
@@ -130,6 +195,10 @@ main {
 }
 
 .messagetext {
+	display: inline-block;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
 	padding: 0.5rem;
 	border-radius: 3%;
 	margin: 0.5rem;
@@ -150,11 +219,12 @@ main {
 	padding: 5px 10px;
 	align-items: end;
 	text-align: end;
-	border-radius: 5px 0px 5px 5px / 5px 0px 5px 5px;
-	-webkit-border-radius: 5px 0px 5px 5px / 5px 0px 5px 5px;
-	-moz-border-radius: 5px 0px 5px 5px / 5px 0px 5px 5px;
-	-ms-border-radius: 5px 0px 5px 5px / 5px 0px 5px 5px;
-	-o-border-radius: 5px 0px 5px 5px / 5px 0px 5px 5px;
+
+	border-radius: 5px 0 5px 5px / 5px 0 5px 5px;
+	-webkit-border-radius: 5px 0 5px 5px / 5px 0 5px 5px;
+	-moz-border-radius: 5px 0 5px 5px / 5px 0 5px 5px;
+	-ms-border-radius: 5px 0 5px 5px / 5px 0 5px 5px;
+	-o-border-radius: 5px 0 5px 5px / 5px 0 5px 5px;
 }
 
 .system {
@@ -162,11 +232,11 @@ main {
 	align-self: self-start;
 	padding: 5px 10px;
 	text-align: start;
-	border-radius: 0% 5px 5px 5px / 0% 5px 5px 5px;
-	-webkit-border-radius: 0% 5px 5px 5px / 0% 5px 5px 5px;
-	-moz-border-radius: 0% 5px 5px 5px / 0% 5px 5px 5px;
-	-ms-border-radius: 0% 5px 5px 5px / 0% 5px 5px 5px;
-	-o-border-radius: 0% 5px 5px 5px / 0% 5px 5px 5px;
+	border-radius: 0 5px 5px 5px / 0 5px 5px 5px;
+	-webkit-border-radius: 0 5px 5px 5px / 0 5px 5px 5px;
+	-moz-border-radius: 0 5px 5px 5px / 0 5px 5px 5px;
+	-ms-border-radius: 0 5px 5px 5px / 0 5px 5px 5px;
+	-o-border-radius: 0 5px 5px 5px / 0 5px 5px 5px;
 }
 
 .error {
@@ -182,5 +252,14 @@ main {
 }
 
 button {
-	background-color: #b8b8b8;
+	background-color: rgba(255, 255, 255, 0);
+	border: none;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-o-border-radius: 5px;
+	padding: 5px 10px;
+	margin: 5px;
+	color: black;
 }
