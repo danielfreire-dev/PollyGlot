@@ -112,8 +112,11 @@ export default function Body() {
 					<div className="input-container">
 						<input
 							id="user-input"
-							type="text"
+							type="text-box"
+							name="userInput"
+							required
 							placeholder="What do you need translated?"
+							autoComplete="off"
 						/>
 						<button>
 							<img src={RightArrow} alt="right-arrow" />
