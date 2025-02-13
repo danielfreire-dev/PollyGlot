@@ -1,9 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import RightArrow from "/assets/send.svg";
+import disabledArrow from "/assets/send-grey.svg";
 import MessageBubble from "../MessageBubble.tsx";
-import OpenAI from "openai";
-import { OPENAI_API_KEY } from "../../env.tsx";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GEMINI_API_KEY } from "../../env.tsx";
 import { nanoid } from "nanoid";
+import Loading from "./Loading.tsx";
 
 /* Converter `convoJson` para `conversation` */
 
@@ -20,7 +22,8 @@ export default function Body() {
 
 	type Message = { role: "user" | "system" | "error"; content: string | null };
 
-	const apiKey = OPENAI_API_KEY;
+	const apiKey = GEMINI_API_KEY;
+	const genAI = new GoogleGenerativeAI(apiKey);
 
 	function MapConversation() {
 		const convo = conversation.map((conv) => {
@@ -35,35 +38,31 @@ export default function Body() {
 		"You are a helpful polyglot who will translate the user's message to " +
 		language +
 		". You will only respond with the translation and nothing else.";
-
+	/* Function to be replaced */
 	async function fetchReport(userMess: Message) {
 		try {
-			const openai = new OpenAI({
-				apiKey: apiKey,
-				dangerouslyAllowBrowser: true,
+			console.log("early async: " + loading);
+			if (typeof userMess.content !== "string") {
+				throw new Error("Invalid message content");
+			}
+
+			const model = genAI.getGenerativeModel({
+				model: "gemini-2.0-flash",
+				systemInstruction: systemMessage,
 			});
 
-			const response = await openai.chat.completions.create({
-				model: "gpt-3.5-turbo",
-				messages: [
-					{ role: "system", content: systemMessage },
-					{
-						role: "user",
-						content: userMess.content || "",
-					},
-				],
-			});
-
+			const result = await model.generateContent(userMess.content);
+			console.log("preConvo: ");
+			console.log(conversation);
 			setConversation((prevConvo): Message[] => [
 				...prevConvo,
 				{
 					role: "system",
-					content: response.choices[0].message.content,
+					content: result.response.text(),
 				},
 			]);
 
-			setLoading((prev) => !prev);
-			setError(""); // Reset the error state
+			setError("");
 		} catch (err) {
 			console.log("Error:", err);
 			setError("Unable to access AI. Please refresh and try again");
@@ -71,14 +70,16 @@ export default function Body() {
 				...prevConvo,
 				{
 					role: "error",
-					content: "Unable to access AI. Please refresh and try again",
+					content: "Unable to access server. Please refresh and try again",
 				},
 			]);
 		}
+		setLoading(false);
 	}
 
 	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
+		setLoading(true);
 		const target = e.target as HTMLFormElement;
 		const inputElement = target.elements[0] as HTMLInputElement;
 		const userMessage = inputElement.value;
@@ -89,7 +90,6 @@ export default function Body() {
 		inputElement.value = "";
 
 		fetchReport({ role: "user", content: userMessage });
-		setLoading((prev) => !prev);
 	}
 
 	function scrollToBottom() {
@@ -102,9 +102,15 @@ export default function Body() {
 
 	return (
 		<main className="flex-1">
+			<small className="api-disclaimer">
+				This app uses the Google AI API to translate text. Please note that the
+				accuracy of the translation may vary depending on the input text and the
+				available resources.
+			</small>
 			<div className="chat-box">
 				<div className="conversation-box">
 					{conversation.length > 0 && <MapConversation />}
+					{loading && <Loading />}
 					<div className="ref" ref={messagesEndRef}></div>
 				</div>
 
@@ -118,8 +124,12 @@ export default function Body() {
 							placeholder="What do you need translated?"
 							autoComplete="off"
 						/>
-						<button>
-							<img src={RightArrow} alt="right-arrow" />
+						<button type="submit" disabled={loading}>
+							{loading ? (
+								<img src={disabledArrow} alt="disabled-right-arrow" />
+							) : (
+								<img src={RightArrow} alt="right-arrow" />
+							)}
 						</button>
 					</div>
 					<select
