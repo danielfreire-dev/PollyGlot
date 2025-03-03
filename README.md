@@ -1,6 +1,7 @@
 # My Awesome Project
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8d26f049-3098-4d5b-856d-3a4850d1d468/deploy-status)](https://app.netlify.com/sites/pollyglot-bydainelli/deploys)
+
 This website uses AI to translate text into other languages.
 
 **Link to project:** https://pollyglot-bydainelli.netlify.app
@@ -32,8 +33,8 @@ This project was originally designed to use an OpenAI API key, but Gemini's free
 I learned many lessons whilst working on this project.
 I originally started this project because I wanted to learn how to build a frontend for ChatGPT, but I learned much more than that. It was also an opportunity to become familiar with Bootstrap, a framework that I did not have much experience with before.
 
-## Examples:
+## Other Projects:
 
-Take a look at these couple examples that I have in my own portfolio:
+Take a look at my other projects:
 
 **Quizzical:** https://github.com/danielfreire-dev/Quizzical
