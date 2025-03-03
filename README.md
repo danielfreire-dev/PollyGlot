@@ -1,50 +1,39 @@
-# React + TypeScript + Vite
+# My Awesome Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8d26f049-3098-4d5b-856d-3a4850d1d468/deploy-status)](https://app.netlify.com/sites/pollyglot-bydainelli/deploys)
+This website uses AI to translate text into other languages.
 
-Currently, two official plugins are available:
+**Link to project:** https://pollyglot-bydainelli.netlify.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![pollyglot demo](https://danielfreire.pages.dev/images/GIFs/pollyglot.gif)
 
-## Expanding the ESLint configuration
+## How It's Made:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+**Tech used:** HTML, CSS, TypeScript, React.js, Bootstrap
 
-- Configure the top-level `parserOptions` property like this:
+This project was originally designed to use an OpenAI API key, but Gemini's free tier allows me to share this project with the world. To develop this process I chose TypeScript because it helps developers see errors before they happen and enabled me to actually spend my time developing and not looking for small bugs. React.js was the library of choice because it enables me to write efficient, mantainable and scalable web apps.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Optimizations
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- GDPR/CCPA notification, informing users that their data will be analyzed by 3rd parties(Google)
+- some separation of functions
+- allow the user to add more languages
+- allow the user to add their own API from multiple providers
+  - OpenAI
+  - Gemini
+  - Mistral
+  - Claude
+  - Deepseek
+  - etc..
+- Make the project WCAG compliant
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Lessons Learned:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+I learned many lessons whilst working on this project.
+I originally started this project because I wanted to learn how to build a frontend for ChatGPT, but I learned much more than that. It was also an opportunity to become familiar with Bootstrap, a framework that I did not have much experience with before.
+
+## Examples:
+
+Take a look at these couple examples that I have in my own portfolio:
+
+**Quizzical:** https://github.com/danielfreire-dev/Quizzical
