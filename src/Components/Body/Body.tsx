@@ -3,11 +3,9 @@ import RightArrow from "/assets/send.svg";
 import disabledArrow from "/assets/send-grey.svg";
 import MessageBubble from "../MessageBubble.tsx";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { GEMINI_API_KEY } from "../../env.tsx";
+/* import { GEMINI_API_KEY } from "../../env.tsx"; */
 import { nanoid } from "nanoid";
 import Loading from "./Loading.tsx";
-
-/* Converter `convoJson` para `conversation` */
 
 export default function Body() {
 	const [conversation, setConversation] = useState<Message[]>([]);
@@ -22,7 +20,12 @@ export default function Body() {
 
 	type Message = { role: "user" | "system" | "error"; content: string | null };
 
-	const apiKey = GEMINI_API_KEY;
+	const apiKey: string = import.meta.env.VITE_APP_GEMINI_API_KEY ?? "";
+
+	if (!apiKey) {
+		throw new Error("VITE_REACT_API_KEY is not defined");
+	}
+
 	const genAI = new GoogleGenerativeAI(apiKey);
 
 	function MapConversation() {
@@ -38,7 +41,8 @@ export default function Body() {
 		"You are a helpful polyglot who will translate the user's message to " +
 		language +
 		". You will only respond with the translation and nothing else.";
-	/* Function to be replaced */
+
+	/* Function to be replaced v */
 	async function fetchReport(userMess: Message) {
 		try {
 			console.log("early async: " + loading);

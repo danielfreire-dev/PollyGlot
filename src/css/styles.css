@@ -121,7 +121,7 @@ main {
 /* Header styles */
 .header-background {
 	background-color: var(--header-background-color);
-	background-image: url("/public/assets/world.svg");
+	background-image: url("/assets/world.svg");
 	background-repeat: no-repeat;
 	background-size: contain;
 	border-radius: 5px;
