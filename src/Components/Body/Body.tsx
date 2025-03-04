@@ -22,7 +22,7 @@ export default function Body() {
 	const apiKey: string = import.meta.env.GEMINI_API_KEY ?? "";
 
 	if (!apiKey) {
-		throw new Error("VITE_REACT_API_KEY is not defined");
+		throw new Error("API key is not defined");
 	}
 
 	const genAI = new GoogleGenerativeAI(apiKey);
