@@ -3,7 +3,6 @@ import RightArrow from "/assets/send.svg";
 import disabledArrow from "/assets/send-grey.svg";
 import MessageBubble from "../MessageBubble.tsx";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-/* import { GEMINI_API_KEY } from "../../env.tsx"; */
 import { nanoid } from "nanoid";
 import Loading from "./Loading.tsx";
 
@@ -72,7 +71,7 @@ export default function Body() {
 				...prevConvo,
 				{
 					role: "error",
-					content: "Unable to access server. Please refresh and try again",
+					content: "Error: " + error,
 				},
 			]);
 		}
