@@ -45,7 +45,6 @@ export default function Body() {
 	/* Function to be replaced v */
 	async function fetchReport(userMess: Message) {
 		try {
-			console.log("early async: " + loading);
 			if (typeof userMess.content !== "string") {
 				throw new Error("Invalid message content");
 			}
@@ -56,8 +55,7 @@ export default function Body() {
 			});
 
 			const result = await model.generateContent(userMess.content);
-			console.log("preConvo: ");
-			console.log(conversation);
+
 			setConversation((prevConvo): Message[] => [
 				...prevConvo,
 				{
@@ -68,7 +66,7 @@ export default function Body() {
 
 			setError("");
 		} catch (err) {
-			console.log("Error:", err);
+			console.error("Error:", err);
 			setError("Unable to access AI. Please refresh and try again");
 			setConversation((prevConvo) => [
 				...prevConvo,
@@ -146,7 +144,7 @@ export default function Body() {
 						<option value="portuguese">🇵🇹 portuguese</option>
 						<option value="english">🇺🇸 english</option>
 						<option value="french">🇫🇷 french</option>
-						<option value="japanese">🇵🇱 polish</option>
+						<option value="polish">🇵🇱 polish</option>
 						<option value="italian">🇮🇹 italian</option>
 					</select>
 				</form>

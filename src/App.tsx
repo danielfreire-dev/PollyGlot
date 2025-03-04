@@ -1,19 +1,26 @@
-import { useState, useEffect } from "react";
-
 import "./App.css";
 import "/src/css/styles.css";
 
+import ReactGA from "react-ga4";
 import Header from "./Components/Header";
 import Body from "./Components/Body/Body";
 import Footer from "./Components/Footer";
-import useAnalyticsEventTracker from "./assets/analytics";
-import Modal from "./Components/Modal";
-import CookieBanner from "./Components/CookeModal/CookieBanner";
 
 function App() {
-	const [acceptCookies, setAcceptCookies] = useState<boolean>(false);
-	const [modalDisplay, setModalDisplay] = useState<boolean>(false);
-	/* if cookies accepted, set modalDisplay === false */
+	const GoogleAnalytics: string = import.meta.env.googleAnalytics || "";
+
+	/* Multiple products (previously known as trackers) */
+	ReactGA.initialize([
+		{
+			trackingId: GoogleAnalytics,
+		},
+	]);
+
+	ReactGA.send({
+		hitType: "pageview",
+		page: "/my-path",
+		title: "PollyGlot",
+	});
 
 	return (
 		<>
