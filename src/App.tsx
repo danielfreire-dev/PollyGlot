@@ -7,7 +7,8 @@ import Body from "./Components/Body/Body";
 import Footer from "./Components/Footer";
 
 function App() {
-	const GoogleAnalytics: string = import.meta.env.googleAnalytics || "";
+	const GoogleAnalytics: string =
+		import.meta.env.REACT_APP_googleAnalytics || "";
 
 	/* Multiple products (previously known as trackers) */
 	ReactGA.initialize([
