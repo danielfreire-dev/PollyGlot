@@ -18,7 +18,7 @@ export default function Body() {
 
 	type Message = { role: "user" | "system" | "error"; content: string | null };
 
-	const apiKey: string = import.meta.env.REACT_APP_GEMINI_API_KEY ?? "";
+	const apiKey: string = import.meta.env.VITE_GEMINI_API_KEY ?? "";
 
 	if (!apiKey) {
 		throw new Error("API key is not defined");
