@@ -124,6 +124,7 @@ export default function Body() {
 								language={language}
 								isActive={isActive}
 								setIsActive={setIsActive}
+								setConversation={setConversation}
 							/>
 						)}
 						{!recordingMenu && (
