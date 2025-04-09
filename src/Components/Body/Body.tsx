@@ -1,15 +1,22 @@
 import { useState, useRef, useEffect } from "react";
-import RightArrow from "/assets/send.svg";
-import disabledArrow from "/assets/send-grey.svg";
-import MessageBubble from "../MessageBubble.tsx";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { nanoid } from "nanoid";
+
 import Loading from "./Loading.tsx";
+import Recording from "../Recording.tsx";
+import MessageBubble from "../MessageBubble.tsx";
+
+import RightArrow from "/assets/send.svg";
+import disabledArrow from "/assets/send-grey.svg";
+
 export default function Body() {
 	const [conversation, setConversation] = useState<Message[]>([]);
-	const [language, setLanguage] = useState<string>("portuguese");
+	const [language, setLanguage] = useState<string>("pt-PT");
 	const [loading, setLoading] = useState<boolean>(false);
 	const [error, setError] = useState<string>("");
+	const [recordingMenu, setRecordingMenu] = useState<boolean>(false);
+	const [isActive, setIsActive] = useState<boolean>(false);
+
 	const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
 	useEffect(() => {
@@ -25,6 +32,11 @@ export default function Body() {
 	}
 
 	const genAI = new GoogleGenerativeAI(apiKey);
+
+	/* Excluding Firefox because it doesn't work with speech recognition */
+	const browser = window.navigator.userAgent;
+	const firefox = browser.includes("firefox") || browser.includes("Firefox");
+	/* console.log("firefox: " + firefox); */
 
 	function MapConversation() {
 		const convo = conversation.map((conv) => {
@@ -100,6 +112,61 @@ export default function Body() {
 		});
 	}
 
+	function SubmitText() {
+		return (
+			<div className="input-line ">
+				<form className="input-box" onSubmit={handleSubmit}>
+					<div className="input-container">
+						{!firefox && (
+							<Recording
+								recordingMenu={recordingMenu}
+								setRecordingMenu={setRecordingMenu}
+								language={language}
+								isActive={isActive}
+								setIsActive={setIsActive}
+							/>
+						)}
+						{!recordingMenu && (
+							<>
+								<input
+									id="user-input"
+									type="text-box"
+									name="userInput"
+									required
+									placeholder="What do you need translated?"
+									autoComplete="off"
+								/>
+								<button type="submit" disabled={loading}>
+									{loading ? (
+										<img src={disabledArrow} alt="disabled-right-arrow" />
+									) : (
+										<img src={RightArrow} alt="right-arrow" />
+									)}
+								</button>
+							</>
+						)}
+					</div>
+
+					<select
+						name="selectLanguage"
+						id="select-language"
+						className="mt-2"
+						value={language}
+						onChange={(e) => setLanguage(e.target.value)}
+					>
+						{/* AI accepts Language Tags (BCP 47) */}
+						<option value="pt-Pt">🇵🇹 portuguese</option>
+						<option value="en-US">🇺🇸 english</option>
+						<option value="fr-FR">🇫🇷 french</option>
+						<option value="it-IT">🇮🇹 italian</option>
+						<option value="nl-NL">🇳🇱 dutch</option>
+						<option value="pl-PL">🇵🇱 polish</option>
+					</select>
+				</form>
+			</div>
+		);
+	}
+
 	return (
 		<main className="flex-1">
 			<small className="api-disclaimer">
@@ -113,39 +180,7 @@ export default function Body() {
 					{loading && <Loading />}
 					<div className="ref" ref={messagesEndRef}></div>
 				</div>
-
-				<form className="input-box" onSubmit={handleSubmit}>
-					<div className="input-container">
-						<input
-							id="user-input"
-							type="text-box"
-							name="userInput"
-							required
-							placeholder="What do you need translated?"
-							autoComplete="off"
-						/>
-						<button type="submit" disabled={loading}>
-							{loading ? (
-								<img src={disabledArrow} alt="disabled-right-arrow" />
-							) : (
-								<img src={RightArrow} alt="right-arrow" />
-							)}
-						</button>
-					</div>
-					<select
-						name="selectLanguage"
-						id="select-language"
-						className="mt-2"
-						value={language}
-						onChange={(e) => setLanguage(e.target.value)}
-					>
-						<option value="portuguese">🇵🇹 portuguese</option>
-						<option value="english">🇺🇸 english</option>
-						<option value="french">🇫🇷 french</option>
-						<option value="polish">🇵🇱 polish</option>
-						<option value="italian">🇮🇹 italian</option>
-					</select>
-				</form>
+				<SubmitText />
 			</div>
 		</main>
 	);

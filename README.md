@@ -17,8 +17,10 @@ This project was originally designed to use an OpenAI API key, but Gemini's free
 ## Optimizations
 
 - "Back to bottom" button
-- GDPR/CCPA notification, informing users that their data will be analyzed by 3rd parties
-- some separation of functions
+- ~~GDPR/CCPA notification, informing users that their data will be analyzed by 3rd parties~~
+- ~~Audio input~~
+- Audio output
+- better separation of functions
 - allow the user to add more languages
 - allow the user to add their own API from multiple providers
   - OpenAI

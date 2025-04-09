@@ -12,6 +12,7 @@
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
     "@popperjs/core": "^2.11.8",
+    "@types/dom-speech-recognition": "^0.0.6",
     "@types/react-scroll-to-bottom": "^4.2.5",
     "bootstrap": "^5.3.3",
     "dotenv": "^16.4.7",
@@ -22,7 +23,8 @@
     "react-dom": "^18.3.1",
     "react-ga4": "^2.1.0",
     "react-scroll-to-bottom": "^4.2.0",
-    "sass": "^1.83.0"
+    "sass": "^1.83.0",
+    "ua-parser-js": "^2.0.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.15.0",

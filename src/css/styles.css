@@ -142,6 +142,7 @@ main {
 }
 
 /* Input styles */
+
 .input-container {
 	display: flex;
 	gap: var(--padding);
@@ -194,6 +195,13 @@ main {
 .conversation-box--input button:disabled {
 	background-color: var(--secondary-color);
 	cursor: not-allowed;
+}
+
+.input-line {
+	display: flex;
+	flex-wrap: nowrap;
+	height: 17vh;
+	justify-content: center;
 }
 
 /* Select styles */
@@ -305,4 +313,17 @@ svg:not(:root) {
 img {
 	vertical-align: middle;
 	border-style: none;
+}
+
+.input-line button {
+	margin: 0;
+	padding: 0;
+	max-height: 100%;
+}
+.microphone-icon {
+	max-height: 3rem;
+}
+
+.clickabe-icon {
+	cursor: pointer;
 }

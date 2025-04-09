@@ -31,3 +31,4 @@ env.*
 .env.production
 # Local Netlify folder
 .netlify
+TestFile.tsx
