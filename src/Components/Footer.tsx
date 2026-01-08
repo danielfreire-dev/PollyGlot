@@ -5,7 +5,7 @@ export default function Footer() {
 		<footer className="footer">
 			<small>
 				{year} © Made with 🌍 by <span> </span>
-				<a href="https://danielfreire.pages.dev" target="_blank">
+				<a href="https://daniel-freire.com" target="_blank">
 					Daniel Freire
 				</a>
 			</small>

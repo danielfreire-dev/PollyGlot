@@ -60,7 +60,7 @@ export default function Body() {
 			}
 
 			const model = genAI.getGenerativeModel({
-				model: "gemini-2.0-flash",
+				model: "gemini-2.5-flash",
 				systemInstruction: systemMessage,
 			});
 
@@ -117,7 +117,7 @@ export default function Body() {
 			<div className="input-line ">
 				<form className="input-box" onSubmit={handleSubmit}>
 					<div className="input-container">
-						{!firefox && (
+						{/* {!firefox && (
 							<Recording
 								recordingMenu={recordingMenu}
 								setRecordingMenu={setRecordingMenu}
@@ -125,8 +125,9 @@ export default function Body() {
 								isActive={isActive}
 								setIsActive={setIsActive}
 								setConversation={setConversation}
+								handleSubmit={handleSubmit}
 							/>
-						)}
+						)} */}
 						{!recordingMenu && (
 							<>
 								<input

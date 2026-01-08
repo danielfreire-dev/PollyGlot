@@ -161,6 +161,7 @@ main {
 	box-sizing: border-box;
 	background-color: var(--secondary-color);
 	color: black;
+	field-sizing: content;
 }
 
 .conversation-box--input {
