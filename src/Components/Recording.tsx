@@ -24,14 +24,13 @@ export default function Recording({
 	language,
 	isActive,
 	setIsActive,
-	setConversation,
 	handleSubmit,
 }: RecordingProps) {
 	/* const [text, setText] = useState<string>(""); */
 	const recognitionRef = useRef<any>(null);
 	const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-	const [audioChunks, setAudioChunks] = useState<Blob[]>([]);
-	const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
+	/* const [audioChunks, setAudioChunks] = useState<Blob[]>([]); */
+	/* const [audioBlob, setAudioBlob] = useState<Blob | null>(null); */
 	const [error, setError] = useState<string | null>(null);
 
 	useEffect(() => {
@@ -55,21 +54,13 @@ export default function Recording({
 				const capitalizedTranscript = capitalizeFirstCharacter(transcript);
 
 				console.log(
-					"Setting conversation with transcript:",
+					"Calling handleSubmit with transcript:",
 					capitalizedTranscript,
 				);
-				setConversation((prevConvo): Message[] => [
-					...prevConvo,
-					{
-						role: "user",
-						content: capitalizedTranscript,
-					},
-				]);
 
 				// Create a synthetic form event that matches handleSubmit's expected structure
 				const syntheticEvent = {
 					preventDefault: () => {},
-
 					target: {
 						elements: [
 							{
@@ -79,7 +70,7 @@ export default function Recording({
 					},
 				} as unknown as React.FormEvent<HTMLFormElement>;
 
-				console.log("Calling handleSubmit with transcript");
+				// Let handleSubmit handle adding the message to conversation
 				handleSubmit(syntheticEvent);
 
 				console.log("transcript: " + capitalizedTranscript);
@@ -102,7 +93,7 @@ export default function Recording({
 
 			recognitionRef.current = recognition;
 		}
-	}, [language, setIsActive, setConversation, handleSubmit]);
+	}, [language, setIsActive, handleSubmit]); // Removed setConversation from dependencies
 
 	useEffect(() => {
 		return () => {
@@ -148,14 +139,14 @@ export default function Recording({
 				const mediaRecorder = new MediaRecorder(stream);
 				mediaRecorderRef.current = mediaRecorder;
 
-				mediaRecorder.ondataavailable = (e) => {
+				/* mediaRecorder.ondataavailable = (e) => {
 					setAudioChunks((prev) => [...prev, e.data]);
-				};
+				}; */
 
 				mediaRecorder.onstop = () => {
-					const blob = new Blob(audioChunks, { type: "audio/wav" });
-					setAudioBlob(blob);
-					setAudioChunks([]);
+					/* const blob = new Blob(audioChunks, { type: "audio/wav" }); */
+					/* setAudioBlob(blob); */
+					/* setAudioChunks([]); */
 					stream.getTracks().forEach((track) => track.stop());
 					console.log("Media recording stopped");
 				};

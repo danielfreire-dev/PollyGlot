@@ -117,7 +117,7 @@ export default function Body() {
 			<div className="input-line ">
 				<form className="input-box" onSubmit={handleSubmit}>
 					<div className="input-container">
-						{/* {!firefox && (
+						{!firefox && (
 							<Recording
 								recordingMenu={recordingMenu}
 								setRecordingMenu={setRecordingMenu}
@@ -127,7 +127,7 @@ export default function Body() {
 								setConversation={setConversation}
 								handleSubmit={handleSubmit}
 							/>
-						)} */}
+						)}
 						{!recordingMenu && (
 							<>
 								<input
