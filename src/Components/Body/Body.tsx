@@ -64,15 +64,27 @@ export default function Body() {
 				systemInstruction: systemMessage,
 			});
 
-			const result = await model.generateContent(userMess.content);
-
 			setConversation((prevConvo): Message[] => [
 				...prevConvo,
-				{
-					role: "system",
-					content: result.response.text(),
-				},
+				{ role: "system", content: "" },
 			]);
+
+			const result = await model.generateContentStream(userMess.content);
+
+			let fullText = "";
+			for await (const chunk of result.stream) {
+				const chunkText = chunk.text();
+				fullText += chunkText;
+
+				setConversation((prevConvo): Message[] => {
+					const newConvo = [...prevConvo];
+					newConvo[newConvo.length - 1] = {
+						...newConvo[newConvo.length - 1],
+						content: fullText,
+					};
+					return newConvo;
+				});
+			}
 
 			setError("");
 		} catch (err) {
@@ -114,7 +126,7 @@ export default function Body() {
 
 	function SubmitText() {
 		return (
-			<div className="input-line ">
+			<div className="input-line">
 				<form className="input-box" onSubmit={handleSubmit}>
 					<div className="input-container">
 						{!firefox && (
@@ -130,9 +142,9 @@ export default function Body() {
 						)}
 						{!recordingMenu && (
 							<>
-								<input
+								<textarea
 									id="user-input"
-									type="text-box"
+
 									name="userInput"
 									required
 									placeholder="What do you need translated?"
