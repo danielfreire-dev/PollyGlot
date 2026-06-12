@@ -12,9 +12,7 @@ interface RecordingProps {
 	language: string;
 	isActive: boolean;
 	setIsActive: (value: boolean | ((prevVar: boolean) => boolean)) => void;
-	setConversation: (
-		value: Message[] | ((prevVar: Message[]) => Message[]),
-	) => void;
+	setConversation: (value: Message[] | ((prevVar: Message[]) => Message[])) => void;
 	handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
@@ -34,8 +32,7 @@ export default function Recording({
 	const [error, setError] = useState<string | null>(null);
 
 	useEffect(() => {
-		const SpeechRecognition =
-			window.SpeechRecognition || window.webkitSpeechRecognition;
+		const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 		if (!SpeechRecognition) {
 			setError("Speech recognition is not supported in this browser");
 			console.error("Speech Recognition API not available");
@@ -53,10 +50,7 @@ export default function Recording({
 				const transcript = event.results[0][0].transcript;
 				const capitalizedTranscript = capitalizeFirstCharacter(transcript);
 
-				console.log(
-					"Calling handleSubmit with transcript:",
-					capitalizedTranscript,
-				);
+				console.log("Calling handleSubmit with transcript:", capitalizedTranscript);
 
 				// Create a synthetic form event that matches handleSubmit's expected structure
 				const syntheticEvent = {
@@ -98,9 +92,7 @@ export default function Recording({
 	useEffect(() => {
 		return () => {
 			if (mediaRecorderRef.current) {
-				mediaRecorderRef.current.stream
-					?.getTracks()
-					.forEach((track) => track.stop());
+				mediaRecorderRef.current.stream?.getTracks().forEach((track) => track.stop());
 			}
 		};
 	}, []);
@@ -169,12 +161,8 @@ export default function Recording({
 	}
 	return (
 		<>
-			{error && (
-				<div style={{ color: "red", fontSize: "12px", marginBottom: "10px" }}>
-					Error: {error}
-				</div>
-			)}
-			{recordingMenu ? (
+			{error && <div className="recording-error">Error: {error}</div>}
+			{recordingMenu ?
 				<>
 					<img
 						className="microphone-icon clickabe-icon"
@@ -182,7 +170,7 @@ export default function Recording({
 						onClick={() => setRecordingMenu(false)}
 						alt="text input"
 					/>
-					{isActive ? (
+					{isActive ?
 						<>
 							<button onClick={handleOnRecord}>
 								<img
@@ -197,23 +185,21 @@ export default function Recording({
 								alt="audio recording"
 							/>
 						</>
-					) : (
-						<img
+					:	<img
 							className="microphone-icon clickabe-icon"
 							src={Play}
 							onClick={handleOnRecord}
 							alt="pause"
 						/>
-					)}
+					}
 				</>
-			) : (
-				<img
+			:	<img
 					className="microphone-icon clickabe-icon"
 					src={Mic}
 					onClick={() => setRecordingMenu(true)}
 					alt="audio input"
 				/>
-			)}
+			}
 		</>
 	);
 }

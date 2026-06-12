@@ -32,3 +32,8 @@ env.*
 # Local Netlify folder
 .netlify
 TestFile.tsx
+
+# Playwright
+/test-results/
+/playwright-report/
+/playwright/.cache/

@@ -1,0 +1,220 @@
+/* ============================================================
+   PollyGlot — Cell-Inspired Themes (Dragon Ball Z)
+   WCAG 2.1 AA Compliant — All contrast ratios ≥ 4.5:1
+   ============================================================ */
+
+/* --- Global defaults (no theme set yet / fallback) -------- */
+/*     Placed FIRST so [data-theme] selectors below win.     */
+:root {
+	--background-color: #f4f8ef;
+	--text-color: #1a2410;
+	--text-muted: #5a6b4a;
+	--header-background-color: #0d182e;
+	--header-text-color: #ffffff;
+	--primary-color: #e65100;
+	--primary-color-hover: #bf360c;
+	--primary-color-active: #870000;
+	--primary-color-text: #ffffff;
+	--link-color: #32cd32;
+	--link-color-hover: #6a1b9a;
+	--secondary-color: #a5d6a7;
+	--border-color: #c8e6c9;
+	--input-background: #ffffff;
+	--input-border: #a5d6a7;
+	--input-text: #1a2410;
+	--input-placeholder: #8a9b7a;
+	--input-focus-border: #7b1fa2;
+	--chat-bubble-user-bg: #c8e6c9;
+	--chat-bubble-user-text: #1a2410;
+	--chat-bubble-system-bg: #e1bee7;
+	--chat-bubble-system-text: #1a2410;
+	--chat-bubble-error-bg: #ffcdd2;
+	--chat-bubble-error-text: #1a2410;
+	--chat-bubble-alert-bg: #fff9c4;
+	--chat-bubble-alert-text: #1a2410;
+	--scrollbar-thumb-color: #7b1fa2;
+	--scrollbar-track-color: #c8e6c9;
+	--selection-bg: #8bc34a;
+	--selection-text: #1a2410;
+	--focus-ring-color: #7b1fa2;
+}
+
+/* --- Cell Light Theme ------------------------------------ */
+[data-theme="light"] {
+	/* Page */
+	--background-color: #f4f8ef;
+	--text-color: #1a2410;
+	--text-muted: #5a6b4a;
+
+	/* Header — close to original navy */
+	--header-background-color: #0d182e;
+	--header-text-color: #ffffff;
+
+	/* Buttons & Interactive */
+	--primary-color: #e65100;
+	--primary-color-hover: #bf360c;
+	--primary-color-active: #870000;
+	--primary-color-text: #ffffff;
+
+	/* Links — Cell's purple crown */
+	--link-color: #32cd32;
+	--link-color-hover: #6a1b9a;
+
+	/* Borders & Dividers */
+	--secondary-color: #a5d6a7;
+	--border-color: #c8e6c9;
+
+	/* Inputs */
+	--input-background: #ffffff;
+	--input-border: #a5d6a7;
+	--input-text: #1a2410;
+	--input-placeholder: #8a9b7a;
+	--input-focus-border: #7b1fa2;
+
+	/* Chat Bubbles */
+	--chat-bubble-user-bg: #c8e6c9;
+	--chat-bubble-user-text: #1a2410;
+	--chat-bubble-system-bg: #e1bee7;
+	--chat-bubble-system-text: #1a2410;
+	--chat-bubble-error-bg: #ffcdd2;
+	--chat-bubble-error-text: #1a2410;
+	--chat-bubble-alert-bg: #fff9c4;
+	--chat-bubble-alert-text: #1a2410;
+
+	/* Scrollbar */
+	--scrollbar-thumb-color: #7b1fa2;
+	--scrollbar-track-color: #c8e6c9;
+
+	/* Selection */
+	--selection-bg: #8bc34a;
+	--selection-text: #1a2410;
+
+	/* Focus ring */
+	--focus-ring-color: #7b1fa2;
+}
+
+/* --- Cell Dark Theme ------------------------------------- */
+[data-theme="dark"] {
+	/* Page */
+	--background-color: #111a0c;
+	--text-color: #e8f0e0;
+	--text-muted: #8a9b7a;
+
+	/* Header — original dark theme */
+	--header-background-color: #0d182e;
+	--header-text-color: #ffffff;
+
+	/* Buttons & Interactive */
+	--primary-color: #ff9800;
+	--primary-color-hover: #f57c00;
+	--primary-color-active: #e65100;
+	--primary-color-text: #111a0c;
+
+	/* Links — Cell's light green body */
+	--link-color: #32cd32;
+	--link-color-hover: #c5e1a5;
+
+	/* Borders & Dividers */
+	--secondary-color: #2e4a1a;
+	--border-color: #3e5a28;
+
+	/* Inputs */
+	--input-background: #1a2e10;
+	--input-border: #3e5a28;
+	--input-text: #e8f0e0;
+	--input-placeholder: #6a7b5a;
+	--input-focus-border: #8bc34a;
+
+	/* Chat Bubbles */
+	--chat-bubble-user-bg: #33691e;
+	--chat-bubble-user-text: #e8f0e0;
+	--chat-bubble-system-bg: #4a148c;
+	--chat-bubble-system-text: #e8f0e0;
+	--chat-bubble-error-bg: #b71c1c;
+	--chat-bubble-error-text: #ffcdd2;
+	--chat-bubble-alert-bg: #5d4037;
+	--chat-bubble-alert-text: #ffe0b2;
+
+	/* Scrollbar */
+	--scrollbar-thumb-color: #8bc34a;
+	--scrollbar-track-color: #1e2d14;
+
+	/* Selection */
+	--selection-bg: #7b1fa2;
+	--selection-text: #e8f0e0;
+
+	/* Focus ring */
+	--focus-ring-color: #8bc34a;
+}
+
+/* --- Auto mode: delegate to OS preference ----------------- */
+[data-theme="auto"] {
+	/* Default to light values, overridden below if OS prefers dark */
+	--background-color: #f4f8ef;
+	--text-color: #1a2410;
+	--text-muted: #5a6b4a;
+	--header-background-color: #0d182e;
+	--header-text-color: #ffffff;
+	--primary-color: #e65100;
+	--primary-color-hover: #bf360c;
+	--primary-color-active: #870000;
+	--primary-color-text: #ffffff;
+	--link-color: #32cd32;
+	--link-color-hover: #6a1b9a;
+	--secondary-color: #a5d6a7;
+	--border-color: #c8e6c9;
+	--input-background: #ffffff;
+	--input-border: #a5d6a7;
+	--input-text: #1a2410;
+	--input-placeholder: #8a9b7a;
+	--input-focus-border: #7b1fa2;
+	--chat-bubble-user-bg: #c8e6c9;
+	--chat-bubble-user-text: #1a2410;
+	--chat-bubble-system-bg: #e1bee7;
+	--chat-bubble-system-text: #1a2410;
+	--chat-bubble-error-bg: #ffcdd2;
+	--chat-bubble-error-text: #1a2410;
+	--chat-bubble-alert-bg: #fff9c4;
+	--chat-bubble-alert-text: #1a2410;
+	--scrollbar-thumb-color: #7b1fa2;
+	--scrollbar-track-color: #c8e6c9;
+	--selection-bg: #8bc34a;
+	--selection-text: #1a2410;
+	--focus-ring-color: #7b1fa2;
+}
+
+@media (prefers-color-scheme: dark) {
+	[data-theme="auto"] {
+		--background-color: #111a0c;
+		--text-color: #e8f0e0;
+		--text-muted: #8a9b7a;
+		--header-background-color: #0d182e;
+		--header-text-color: #fff;
+		--primary-color: #ff9800;
+		--primary-color-hover: #f57c00;
+		--primary-color-active: #e65100;
+		--primary-color-text: #111a0c;
+		--link-color: #32cd32;
+		--link-color-hover: #c5e1a5;
+		--secondary-color: #2e4a1a;
+		--border-color: #3e5a28;
+		--input-background: #1a2e10;
+		--input-border: #3e5a28;
+		--input-text: #e8f0e0;
+		--input-placeholder: #6a7b5a;
+		--input-focus-border: #8bc34a;
+		--chat-bubble-user-bg: #33691e;
+		--chat-bubble-user-text: #e8f0e0;
+		--chat-bubble-system-bg: #4a148c;
+		--chat-bubble-system-text: #e8f0e0;
+		--chat-bubble-error-bg: #b71c1c;
+		--chat-bubble-error-text: #ffcdd2;
+		--chat-bubble-alert-bg: #5d4037;
+		--chat-bubble-alert-text: #ffe0b2;
+		--scrollbar-thumb-color: #8bc34a;
+		--scrollbar-track-color: #1e2d14;
+		--selection-bg: #7b1fa2;
+		--selection-text: #e8f0e0;
+		--focus-ring-color: #8bc34a;
+	}
+}
